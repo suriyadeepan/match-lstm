@@ -6,6 +6,8 @@ from lib.data_utils import unpack_data
 
 import model
 
+import sys
+
 
 if __name__ == '__main__':
 
@@ -49,6 +51,8 @@ if __name__ == '__main__':
                         mlstm.labels : np.array(data[3])
                     })
                     avg_loss += loss_v
+                except KeyboardInterrupt:
+                    sys.exit()
                 except:
                     except_cnt += 1
 
