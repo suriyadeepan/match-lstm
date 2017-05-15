@@ -1,18 +1,16 @@
 import tensorflow as tf
 import numpy as np
 
-from lib.vectorize import vectorize
-from lib.data_utils import unpack_data
-
 
 class mLSTM(object):
 
-    def __init__(self, sentence_size, num_class, embedding_size, batch_size, vocab_size):
+    def __init__(self, sentence_size, num_class, embedding_size, batch_size, vocab_size, lr):
 
         self.sentence_size = sentence_size
         self.num_class = num_class
         self.embedding_size = embedding_size
         self.batch_size = batch_size
+        self.lr = lr
 
         def __graph__():
 
@@ -146,7 +144,8 @@ class mLSTM(object):
             # Optimization
             cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels=labels, logits=logits)
             loss = tf.reduce_sum(cross_entropy)
-            train_op = tf.train.AdagradOptimizer(0.01).minimize(loss)
+            optimizer = tf.train.AdamOptimizer(learning_rate=self.lr, beta1=0.9, beta2=0.999)
+            train_op = optimizer.minimize(loss)
 
             # attach graph nodes to class
             self.train_op = train_op
