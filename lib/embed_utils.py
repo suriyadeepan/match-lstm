@@ -1,4 +1,3 @@
-#from preprocess.file_utils import serialize, deserialize, DATA_DIR
 from lib.file_utils import serialize, deserialize, DATA_DIR
 import os
 from gensim.models import Word2Vec
@@ -95,6 +94,5 @@ def embed_glove(path):
 
 
 if __name__ == '__main__':
-    # embed_word2vec()
-    embed_glove(os.path.join(DATA_DIR, ''))
-    pass
+    embed_word2vec()
+    #embed_glove(os.path.join(DATA_DIR, ''))
